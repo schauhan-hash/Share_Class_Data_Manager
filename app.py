@@ -27,7 +27,7 @@ SOURCE_FILE = ROOT / "data" / "Genericized_Sample_Data.xlsx"
 TEMPLATE_FILE = ROOT / "data" / "Corrected_Excel_File_Format.xlsx"
 
 st.set_page_config(
-    page_title="HVP Share Class Data Manager",
+    page_title="Share Class Data Manager",
     page_icon="H",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -120,10 +120,10 @@ def permissions():
 def actor():
     role = st.session_state.role
     return {
-        "Viewer": "demo.viewer@harbourvest.com",
-        "Editor": "schauhan@harbourvest.com",
-        "Reviewer": "demo.reviewer@harbourvest.com",
-        "Admin": "demo.admin@harbourvest.com",
+        "Viewer": "demo.viewer@example.com",
+        "Editor": "demo.editor@example.com",
+        "Reviewer": "demo.reviewer@example.com",
+        "Admin": "demo.admin@example.com",
     }[role]
 
 
@@ -609,9 +609,9 @@ def admin_page():
     st.subheader("Production identity mapping")
     st.code(
         "Corporate identity: Microsoft Entra ID\n"
-        "Allowed domain: @harbourvest.com\n"
-        "Example identity: schauhan@harbourvest.com\n"
-        "Recommended groups: HVP-ShareClass-Viewers, Editors, Reviewers, Admins\n"
+        "Allowed domain: configured company domain\n"
+        "Example identity: employee@example.com\n"
+        "Recommended groups: ShareClass-Viewers, Editors, Reviewers, Admins\n"
         "No assigned group -> no access",
         language="text",
     )
@@ -632,7 +632,7 @@ inject_style()
 initialize_state()
 
 with st.sidebar:
-    st.markdown("## HVP  /  Master Data")
+    st.markdown("## Master Data")
     st.caption("Share Class Data Manager")
     st.divider()
     st.markdown("### Demo identity")
