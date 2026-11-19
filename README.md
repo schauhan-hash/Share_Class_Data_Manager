@@ -1,4 +1,4 @@
-# HVP Share Class Data Manager
+# Share Class Data Manager
 
 A deployment-ready Streamlit demo for browsing and managing the genericized share-class master data
 in `data/Genericized_Sample_Data.xlsx`.
@@ -8,9 +8,12 @@ in `data/Genericized_Sample_Data.xlsx`.
 - Dashboard with record and data-quality metrics
 - Search and filters by lifecycle, currency, and share-class type
 - Grouped add/edit form covering all 37 taxonomy fields
+- Form entries remain available after submission, including when validation fails
 - Reviewer queue for record, deletion, and workbook-import proposals
 - Automatic ISIN generation: `GF555555555<next integer>`
 - Duplicate, required-field, date, numeric, and lock-rule validation
+- Record proposals are blocked by duplicate identifiers belonging to the proposed record,
+  not by unrelated duplicates elsewhere in the dataset
 - Corrected taxonomy and working-data downloads
 - Session audit history
 - Demo roles for Viewer, Editor, Reviewer, and Admin
@@ -47,10 +50,10 @@ deployment with confidential or regulated data.
 
 Before handling real data:
 
-- Authenticate users through HarbourVest-approved Microsoft Entra ID.
-- Require an explicit `@harbourvest.com` identity and Entra group membership.
-- Suggested groups: `HVP-ShareClass-Viewers`, `HVP-ShareClass-Editors`,
-  `HVP-ShareClass-Reviewers`, and `HVP-ShareClass-Admins`.
+- Authenticate users through the organization's approved Microsoft Entra ID.
+- Require an explicit company-domain identity and Entra group membership.
+- Suggested groups: `ShareClass-Viewers`, `ShareClass-Editors`,
+  `ShareClass-Reviewers`, and `ShareClass-Admins`.
 - Enforce role permissions in every server-side mutation.
 - Store approved records and audit events in an authenticated managed database.
 - Implement atomic ISIN allocation in the database to handle concurrent users.
