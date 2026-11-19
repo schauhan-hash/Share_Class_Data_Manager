@@ -6,6 +6,7 @@ import json
 import streamlit as st
 
 from share_class_manager.core import (
+    clean_value,
     diff_records,
     fill_missing_isins,
     normalize_records,
@@ -287,7 +288,7 @@ def render_editor():
         record = deepcopy(before)
         prefix = f"edit_{record_options[label]}"
 
-    with st.form(f"{prefix}_form", clear_on_submit=prefix == "new"):
+    with st.form(f"{prefix}_form"):
         tabs = st.tabs(list(FIELD_GROUPS))
         edited = deepcopy(record)
         for tab, (group, fields) in zip(tabs, FIELD_GROUPS.items()):
@@ -324,7 +325,8 @@ def render_editor():
             issue
             for issue in dataset_issues
             if issue["severity"] == "Error"
-            and (edited.get(issue["field"]) == issue["record"] or "Duplicate value" in issue["message"])
+            and "Duplicate value" in issue["message"]
+            and clean_value(edited.get(issue["field"], "")) == issue["record"]
         ]
         if blockers or duplicate_blockers:
             st.error("This proposal contains blocking issues and was not submitted.")
